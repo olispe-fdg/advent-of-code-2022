@@ -1,4 +1,5 @@
 # Advent of Code 2022 - Wheel Edition
+https://wheelofnames.com/yh3-zzz
 
 AoC but using a wheel to pick a random language (mostly obscure or outdated) to solve each day with, unless it depends on a previous day.
 
