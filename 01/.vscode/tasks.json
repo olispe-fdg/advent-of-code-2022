@@ -1,0 +1,45 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "dub",
+      "run": true,
+      "cwd": "c:/NonWork/AdventOfCode/advent-of-code-2022/01",
+      "compiler": "$current",
+      "archType": "$current",
+      "buildType": "$current",
+      "configuration": "$current",
+      "problemMatcher": ["$dmd"],
+      "group": "build",
+      "label": "Day 1: Run",
+      "detail": "dub run --compiler=dmd -a=x86_64 -b=debug -c=application"
+    },
+    {
+      "type": "dub",
+      "run": false,
+      "cwd": "c:/NonWork/AdventOfCode/advent-of-code-2022/01",
+      "compiler": "$current",
+      "archType": "$current",
+      "buildType": "$current",
+      "configuration": "$current",
+      "problemMatcher": ["$dmd"],
+      "group": "build",
+      "label": "Day 1: Build",
+      "detail": "dub build --compiler=dmd -a=x86_64 -b=debug -c=application"
+    },
+    {
+      "type": "dub",
+      "run": false,
+      "cwd": "c:/NonWork/AdventOfCode/advent-of-code-2022/01",
+      "force": true,
+      "compiler": "$current",
+      "archType": "$current",
+      "buildType": "$current",
+      "configuration": "$current",
+      "problemMatcher": ["$dmd"],
+      "group": "build",
+      "label": "Day 1: Rebuild",
+      "detail": "dub build --force --compiler=dmd -a=x86_64 -b=debug -c=application"
+    }
+  ]
+}

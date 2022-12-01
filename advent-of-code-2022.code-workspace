@@ -2,11 +2,11 @@
   "folders": [
     {
       "name": "root",
-      "path": "../"
+      "path": "./"
     },
     {
       "name": "Day 1",
-      "path": "../01"
+      "path": "./01"
     }
   ]
 }
