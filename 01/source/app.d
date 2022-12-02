@@ -2,6 +2,7 @@ import std.stdio;
 import core.stdc.errno;
 import std.exception;
 import std.conv;
+import std.algorithm;
 
 int main(string[] args)
 {
@@ -13,12 +14,12 @@ int main(string[] args)
 	try {
 		auto file = File(args[1], "r");
 
-		uint maxCalories = 0;
+		uint[] elves;
 		uint caloriesAccumulator = 0;
 
 		foreach (line; file.byLine) {
 			if (line.length == 0) {
-				maxCalories = caloriesAccumulator > maxCalories ? caloriesAccumulator : maxCalories;
+				elves ~= caloriesAccumulator;
 				caloriesAccumulator = 0;
 				continue;
 			}
@@ -31,12 +32,19 @@ int main(string[] args)
 				return 1;
 			}
 		}
+		file.close(); // D does cleanup but we're hanging the terminal later
 
-		writefln("Maximum total calories: %u", maxCalories);
-		writeln("Press any key to exit...");
+		if (elves.length < 3) {
+			writeln("Not enough elves");
+			return 1;
+		}
+		elves.sort!("a > b");
 
-		file.close(); // D does cleanup but we're hanging the terminal
-		getchar(); // Pause the terminal
+		writefln("Top 3 elves: %u, %u, %u", elves[0], elves[1], elves[2]);
+		writefln("Total: %u", elves[0] + elves[1] + elves[2]);
+
+		writeln("Press enter to exit...");
+		getchar();
 	} catch (ErrnoException err) {
 		switch (err.errno) {
 			case EPERM:
