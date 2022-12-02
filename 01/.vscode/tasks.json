@@ -47,7 +47,7 @@
     {
       "id": "inputFile",
       "description": "Path to input file",
-      "default": "./input.txt",
+      "default": "./debug.txt",
       "type": "promptString"
     }
   ]
