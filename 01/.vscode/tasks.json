@@ -12,7 +12,8 @@
       "problemMatcher": ["$dmd"],
       "group": "build",
       "label": "Day 1: Run",
-      "detail": "dub run --compiler=dmd -a=x86_64 -b=debug -c=application"
+      "detail": "dub run --compiler=dmd -a=x86_64 -b=debug -c=application",
+      "target_args": ["${input:inputFile}"]
     },
     {
       "type": "dub",
@@ -40,6 +41,14 @@
       "group": "build",
       "label": "Day 1: Rebuild",
       "detail": "dub build --force --compiler=dmd -a=x86_64 -b=debug -c=application"
+    }
+  ],
+  "inputs": [
+    {
+      "id": "inputFile",
+      "description": "Path to input file",
+      "default": "./input.txt",
+      "type": "promptString"
     }
   ]
 }
