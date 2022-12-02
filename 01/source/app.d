@@ -34,6 +34,8 @@ int main(string[] args)
 
 		writefln("Maximum total calories: %u", maxCalories);
 		writeln("Press any key to exit...");
+
+		file.close(); // D does cleanup but we're hanging the terminal
 		getchar(); // Pause the terminal
 	} catch (ErrnoException err) {
 		switch (err.errno) {
