@@ -1,0 +1,43 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "shell",
+      "label": "Day 2: Run",
+      "command": "v",
+      "args": [
+        "run",
+        "${workspaceFolder}${pathSeparator}source",
+        "${input:inputFile}"
+      ],
+      "group": "build",
+      "presentation": {
+        "reveal": "silent"
+      },
+      "problemMatcher": "$gcc"
+    },
+    {
+      "type": "shell",
+      "label": "Day 2: Build",
+      "command": "v",
+      "args": [
+        "-o",
+        "${workspaceFolder}${pathSeparator}aoc2022-02.exe",
+        "${workspaceFolder}${pathSeparator}source"
+      ],
+      "group": "build",
+      "presentation": {
+        "reveal": "silent"
+      },
+      "problemMatcher": "$gcc"
+    }
+  ],
+  "inputs": [
+    {
+      "id": "inputFile",
+      "description": "Path to input file",
+      "default": "./debug.txt",
+      "type": "promptString"
+    }
+  ]
+}
