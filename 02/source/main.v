@@ -7,6 +7,16 @@ enum Play as u8 {
 	scissors
 }
 
+const rules = {
+	Play.rock: Play.scissors
+	Play.paper: Play.rock
+	Play.scissors: Play.paper
+}
+
+fn a_beats_b(a Play, b Play) bool {
+	return rules[a] == b
+}
+
 fn number_to_play(num u8) Play {
 	return match num {
 		0 { Play.rock }
@@ -28,28 +38,10 @@ fn play_score(play Play) u8 {
 }
 
 fn round_score(opponent Play, you Play) u8 {
-	return match opponent {
-		.rock {
-			match you {
-				.rock { 3 }
-				.paper { 6 }
-				.scissors { 0 }
-			}
-		}
-		.paper {
-			match you {
-				.rock { 0 }
-				.paper { 3 }
-				.scissors { 6 }
-			}
-		}
-		.scissors {
-			match you {
-				.rock { 6 }
-				.paper { 0 }
-				.scissors { 3 }
-			}
-		}
+	return match true {
+		a_beats_b(opponent, you) { 0 }
+		opponent == you { 3 }
+		else { 6 }
 	}
 }
 
