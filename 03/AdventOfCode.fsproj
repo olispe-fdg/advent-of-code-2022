@@ -3,7 +3,6 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net7.0</TargetFramework>
-	<StartArguments>./debug.txt</StartArguments>
   </PropertyGroup>
 
   <ItemGroup>
