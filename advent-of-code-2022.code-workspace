@@ -1,20 +1,24 @@
 {
-  "folders": [
-    {
-      "name": "root",
-      "path": "./"
-    },
-    {
-      "name": "Day 1",
-      "path": "./01"
-    },
-    {
-      "name": "Day 2",
-      "path": "./02"
-    },
-    {
-      "name": "Day 3",
-      "path": "./03"
-    }
-  ]
+	"folders": [
+		{
+			"name": "root",
+			"path": "./"
+		},
+		{
+			"name": "Day 1",
+			"path": "./01"
+		},
+		{
+			"name": "Day 2",
+			"path": "./02"
+		},
+		{
+			"name": "Day 3",
+			"path": "./03"
+		},
+		{
+			"name": "Day 4",
+			"path": "./04"
+		}
+	]
 }

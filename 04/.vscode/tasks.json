@@ -1,0 +1,15 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "gprbuild",
+			"label": "Day 4: Build",
+			"projectFile": "${workspaceFolder}${pathSeparator}advent_of_code.gpr",
+			"problemMatcher": "$ada",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		}
+	]
+}
