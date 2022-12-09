@@ -1,0 +1,32 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Day 5: Build",
+			"type": "shell",
+			"command": "nim c --out:${workspaceFolder}${pathSeparator}bin${pathSeparator}AdventOfCode -d:debug --debugger:native ${workspaceFolder}${pathSeparator}source${pathSeparator}main.nim",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"problemMatcher": "$nim"
+		},
+		{
+			"label": "Day 5: Build Release",
+			"type": "shell",
+			"command": "nim c -d:release --out:${workspaceFolder}${pathSeparator}bin${pathSeparator}AdventOfCode -d:debug --debugger:native ${workspaceFolder}${pathSeparator}source${pathSeparator}main.nim",
+			"group": {
+				"kind": "build",
+				"isDefault": false
+			},
+			"problemMatcher": "$nim"
+		},
+		{
+			"label": "Day 5: Run",
+			"type": "shell",
+			"command": "nim c -r --out:${workspaceFolder}${pathSeparator}bin${pathSeparator}AdventOfCode -d:debug --debugger:native ${workspaceFolder}${pathSeparator}source${pathSeparator}main.nim",
+			"group": "none",
+			"problemMatcher": "$nim"
+		}
+	]
+}
