@@ -1,6 +1,4 @@
 with Ada.Text_IO;
-with Ada.Text_IO.Unbounded_IO;
-with Ada.Strings.Unbounded; use Ada.Strings.Unbounded;
 with Ada.Characters.Handling;
 
 with Ada.Command_Line;
@@ -9,7 +7,6 @@ with Types; use Types;
 
 procedure Advent_Of_Code is
     package IO renames Ada.Text_IO;
-    package Unbounded_IO renames Ada.Text_IO.Unbounded_IO;
     package Chars renames Ada.Characters.Handling;
 
     function Scan_Range_Bound
@@ -32,6 +29,27 @@ procedure Advent_Of_Code is
         return Ret_Val;
     end Scan_Range_Bound;
 
+    function Do_Elves_Overlap_Entirely
+       (Elf_A : Elf; Elf_B : Elf) return Boolean
+    is
+        Min_Elf : Elf;
+        Max_Elf : Elf;
+    begin
+        if Elf_A.Range_End - Elf_A.Range_Start >
+           Elf_B.Range_End - Elf_B.Range_Start
+        then
+            Min_Elf := Elf_B;
+            Max_Elf := Elf_A;
+        else
+            Min_Elf := Elf_A;
+            Max_Elf := Elf_B;
+        end if;
+
+        return
+           Min_Elf.Range_Start >= Max_Elf.Range_Start and
+           Min_Elf.Range_End <= Max_Elf.Range_End;
+    end Do_Elves_Overlap_Entirely;
+
     procedure Parse_Elves (Line : in String; Elf_A : out Elf; Elf_B : out Elf)
     is
         type Index is range 1 .. 2;
@@ -53,24 +71,23 @@ procedure Advent_Of_Code is
     File_Name : constant String := Ada.Command_Line.Argument (1);
     File      : IO.File_Type;
 
-    Elf_A : Elf;
-    Elf_B : Elf;
+    Overlapping_Pairs : Natural := 0;
 begin
     IO.Put_Line ("Reading file: " & File_Name);
     IO.Open (File, IO.In_File, File_Name);
 
     while not IO.End_Of_File (File) loop
         declare
-            Line : String := IO.Get_Line (File);
+            Line  : String := IO.Get_Line (File);
+            Elf_A : Elf;
+            Elf_B : Elf;
         begin
             Parse_Elves (Line, Elf_A, Elf_B);
-
-            IO.Put_Line
-               ("Elf A: " & Range_Bound'Image (Elf_A.Range_Start) & ", " &
-                Range_Bound'Image (Elf_A.Range_End));
-            IO.Put_Line
-               ("Elf B: " & Range_Bound'Image (Elf_B.Range_Start) & ", " &
-                Range_Bound'Image (Elf_B.Range_End));
+            if Do_Elves_Overlap_Entirely (Elf_A, Elf_B) then
+                Overlapping_Pairs := Overlapping_Pairs + 1;
+            end if;
         end;
     end loop;
+
+    IO.Put_Line ("Overlapping Pairs: " & Natural'Image (Overlapping_Pairs));
 end Advent_Of_Code;
