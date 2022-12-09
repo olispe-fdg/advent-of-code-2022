@@ -1,8 +1,9 @@
 project Advent_Of_Code is
-   for Main use ("advent_of_code.adb");
-   for Object_Dir use ".objs";
+	for Main use ("advent_of_code.adb");
+	for Source_Dirs use ("./source");
+	for Object_Dir use ".objs";
 
-   package Compiler is
-      for Default_Switches ("Ada") use ("-g");
-   end Compiler;
+	package Compiler is
+		for Default_Switches ("Ada") use ("-g");
+	end Compiler;
 end Advent_Of_Code;
