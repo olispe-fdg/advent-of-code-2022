@@ -4,29 +4,52 @@
 		{
 			"label": "Day 5: Build",
 			"type": "shell",
-			"command": "nim c --out:${workspaceFolder}${pathSeparator}bin${pathSeparator}AdventOfCode -d:debug --debugger:native ${workspaceFolder}${pathSeparator}source${pathSeparator}main.nim",
+			"command": "nim",
 			"group": {
 				"kind": "build",
 				"isDefault": true
 			},
-			"problemMatcher": "$nim"
+			"problemMatcher": "$nim",
+			"args": [
+				"c",
+				"--out:${workspaceFolder}${pathSeparator}bin${pathSeparator}AdventOfCode",
+				"-d:debug",
+				"--debugger:native",
+				"${workspaceFolder}${pathSeparator}source${pathSeparator}main.nim"
+			]
 		},
 		{
 			"label": "Day 5: Build Release",
 			"type": "shell",
-			"command": "nim c -d:release --out:${workspaceFolder}${pathSeparator}bin${pathSeparator}AdventOfCode -d:debug --debugger:native ${workspaceFolder}${pathSeparator}source${pathSeparator}main.nim",
+			"command": "nim",
 			"group": {
 				"kind": "build",
 				"isDefault": false
 			},
-			"problemMatcher": "$nim"
+			"problemMatcher": "$nim",
+			"args": [
+				"c",
+				"-r",
+				"--out:${workspaceFolder}${pathSeparator}bin${pathSeparator}AdventOfCode",
+				"-d:release",
+				"${workspaceFolder}${pathSeparator}source${pathSeparator}main.nim"
+			]
 		},
 		{
 			"label": "Day 5: Run",
 			"type": "shell",
-			"command": "nim c -r --out:${workspaceFolder}${pathSeparator}bin${pathSeparator}AdventOfCode -d:debug --debugger:native ${workspaceFolder}${pathSeparator}source${pathSeparator}main.nim",
+			"command": "nim",
 			"group": "none",
-			"problemMatcher": "$nim"
+			"problemMatcher": "$nim",
+			"args": [
+				"c",
+				"-r",
+				"--out:${workspaceFolder}${pathSeparator}bin${pathSeparator}AdventOfCode",
+				"-d:debug",
+				"--debugger:native",
+				"${workspaceFolder}${pathSeparator}source${pathSeparator}main.nim",
+				"${workspaceFolder}${pathSeparator}debug.txt"
+			]
 		}
 	]
 }

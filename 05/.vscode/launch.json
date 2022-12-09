@@ -11,7 +11,8 @@
 			"target": "./bin/AdventOfCode.exe",
 			"cwd": "${workspaceRoot}",
 			"valuesFormatting": "parseText",
-			"preLaunchTask": "Day 5: Build"
+			"preLaunchTask": "Day 5: Build",
+			"arguments": "./debug.txt"
 		}
 	]
 }
