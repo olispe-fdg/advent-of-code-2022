@@ -29,11 +29,12 @@ procedure Advent_Of_Code is
         return Ret_Val;
     end Scan_Range_Bound;
 
-    function Do_Elves_Overlap_Entirely
-       (Elf_A : Elf; Elf_B : Elf) return Boolean
-    is
+    function Test_Elf_Overlap (Elf_A : Elf; Elf_B : Elf) return Overlap is
         Min_Elf : Elf;
         Max_Elf : Elf;
+
+        Start_Overlaps : Boolean;
+        End_Overlaps   : Boolean;
     begin
         if Elf_A.Range_End - Elf_A.Range_Start >
            Elf_B.Range_End - Elf_B.Range_Start
@@ -45,10 +46,19 @@ procedure Advent_Of_Code is
             Max_Elf := Elf_B;
         end if;
 
-        return
-           Min_Elf.Range_Start >= Max_Elf.Range_Start and
-           Min_Elf.Range_End <= Max_Elf.Range_End;
-    end Do_Elves_Overlap_Entirely;
+        Start_Overlaps :=
+           Min_Elf.Range_Start in Max_Elf.Range_Start .. Max_Elf.Range_End;
+        End_Overlaps   :=
+           Min_Elf.Range_End in Max_Elf.Range_Start .. Max_Elf.Range_End;
+
+        if Start_Overlaps and End_Overlaps then
+            return Overlap_Full;
+        elsif Start_Overlaps or End_Overlaps then
+            return Overlap_Partial;
+        else
+            return Overlap_None;
+        end if;
+    end Test_Elf_Overlap;
 
     procedure Parse_Elves (Line : in String; Elf_A : out Elf; Elf_B : out Elf)
     is
@@ -71,7 +81,8 @@ procedure Advent_Of_Code is
     File_Name : constant String := Ada.Command_Line.Argument (1);
     File      : IO.File_Type;
 
-    Overlapping_Pairs : Natural := 0;
+    Full_Overlap_Pairs    : Natural := 0;
+    Partial_Overlap_Pairs : Natural := 0;
 begin
     IO.Put_Line ("Reading file: " & File_Name);
     IO.Open (File, IO.In_File, File_Name);
@@ -81,13 +92,26 @@ begin
             Line  : String := IO.Get_Line (File);
             Elf_A : Elf;
             Elf_B : Elf;
+
+            Overlapping : Overlap;
         begin
             Parse_Elves (Line, Elf_A, Elf_B);
-            if Do_Elves_Overlap_Entirely (Elf_A, Elf_B) then
-                Overlapping_Pairs := Overlapping_Pairs + 1;
+
+            Overlapping := Test_Elf_Overlap (Elf_A, Elf_B);
+
+            if Overlapping /= Overlap_None then
+                Partial_Overlap_Pairs := Partial_Overlap_Pairs + 1;
+
+                if Overlapping = Overlap_Full then
+                    Full_Overlap_Pairs := Full_Overlap_Pairs + 1;
+                end if;
             end if;
         end;
     end loop;
 
-    IO.Put_Line ("Overlapping Pairs: " & Natural'Image (Overlapping_Pairs));
+    IO.Put_Line
+       ("Fully Overlapping Pairs: " & Natural'Image (Full_Overlap_Pairs));
+    IO.Put_Line
+       ("Partially Overlapping Pairs: " &
+        Natural'Image (Partial_Overlap_Pairs));
 end Advent_Of_Code;

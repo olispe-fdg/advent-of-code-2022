@@ -1,5 +1,5 @@
 package Types is
-	type Range_Bound is mod 2**32;
+    type Range_Bound is mod 2**32;
 
     type Elf is record
         Range_Start : Range_Bound;
@@ -10,4 +10,6 @@ package Types is
         A : Elf;
         B : Elf;
     end record;
+
+    type Overlap is (Overlap_None, Overlap_Partial, Overlap_Full);
 end Types;
