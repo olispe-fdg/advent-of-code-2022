@@ -48,8 +48,16 @@
 				"-d:debug",
 				"--debugger:native",
 				"${workspaceFolder}${pathSeparator}source${pathSeparator}main.nim",
-				"${workspaceFolder}${pathSeparator}debug.txt"
+				"${input:inputFile}"
 			]
+		}
+	],
+	"inputs": [
+		{
+			"id": "inputFile",
+			"description": "Path to input file",
+			"default": "./debug.txt",
+			"type": "promptString"
 		}
 	]
 }

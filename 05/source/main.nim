@@ -1,6 +1,7 @@
 import os
 import algorithm
 import nre
+import strutils
 
 let fileName = paramStr(1)
 let f = open(fileName)
@@ -34,11 +35,20 @@ for stack in stacks.mitems:
     stack.reverse()
 
 # Perform moves
-proc moveCrate(self: Stacks, fromStack: int, toStack: int) =
-    echo "NYI"
+proc moveCrate(self: var Stacks, fromStack: int, toStack: int) =
+    self[toStack].add(self[fromStack].pop())
 
 while f.readLine(line):
-    echo line
+    let match = line.match(moveExpr)
+    if match.isNone: continue
+
+    let
+        count = match.get.captures[0].parseInt
+        fromStack = match.get.captures[1].parseInt - 1
+        toStack = match.get.captures[2].parseInt - 1
+
+    for i in 1..count:
+        stacks.moveCrate(fromStack, toStack)
 
 # Print stack tops
 var output = ""
