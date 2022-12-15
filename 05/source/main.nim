@@ -10,6 +10,14 @@ type
     Stack = seq[string]
     Stacks = array[9, Stack]
 
+proc topsToString(self: Stacks): string =
+    var output = ""
+    for stack in self:
+        if stack.len > 0:
+            output &= stack[^1]
+
+    return output
+
 let stackExpr = re"(?:(?:    )|(?:\[([A-Z])\]))"
 let moveExpr = re"move ([0-9]+) from ([0-9]+) to ([0-9]+)"
 
@@ -35,8 +43,26 @@ for stack in stacks.mitems:
     stack.reverse()
 
 # Perform moves
-proc moveCrate(self: var Stacks, fromStack: int, toStack: int) =
-    self[toStack].add(self[fromStack].pop())
+proc crateMover9000(
+    self: var Stacks,
+    count: int,
+    fromStack: int,
+    toStack: int
+) =
+    for i in 1..count:
+        self[toStack].add(self[fromStack].pop())
+
+proc crateMover9001(
+    self: var Stacks,
+    count: int,
+    fromStack: int,
+    toStack: int
+) =
+    self[toStack].add(self[fromStack][^count .. ^1])
+    self[fromStack].setLen(self[fromStack].len - count)
+
+var stacksPart2: Stacks
+deepCopy(stacksPart2, stacks)
 
 while f.readLine(line):
     let match = line.match(moveExpr)
@@ -47,13 +73,9 @@ while f.readLine(line):
         fromStack = match.get.captures[1].parseInt - 1
         toStack = match.get.captures[2].parseInt - 1
 
-    for i in 1..count:
-        stacks.moveCrate(fromStack, toStack)
+    stacks.crateMover9000(count, fromStack, toStack)
+    stacksPart2.crateMover9001(count, fromStack, toStack)
 
 # Print stack tops
-var output = ""
-for stack in stacks:
-    if stack.len > 0:
-        output &= stack[^1]
-
-echo output
+echo "Part 1: ", stacks.topsToString()
+echo "Part 2: ", stacksPart2.topsToString()
