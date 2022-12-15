@@ -23,6 +23,15 @@
 		{
 			"name": "Day 5",
 			"path": "./05"
+		},
+		{
+			"name": "Day 6",
+			"path": "./06"
 		}
-	]
+	],
+	"settings": {
+		"files.watcherExclude": {
+			"**/target": true
+		}
+	}
 }
