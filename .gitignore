@@ -1,2 +1,5 @@
 *.exe
 *.pdb
+
+# Opening workspace causes metals ext to generate logs at root
+.metals
